@@ -65,12 +65,23 @@ Generate internship reports with:
 
 ---
 
+# 🖥️ Platform Compatibility
+
+| Platform | Status |
+|-----------|---------|
+| 🪟 Windows | ✅ Supported |
+| 🤖 Android | 🚧 In Development |
+| 🍎 macOS | 📅 Planned |
+| 🐧 Linux | 📅 Planned |
+| 🌐 Web | 📅 Planned |
+| 📱 iOS | 📅 Planned |
+
+---
+
 # 📷 Trailer
 
 
 https://github.com/user-attachments/assets/c17f20e4-1358-490c-9daf-2e9b161c2b88
-
-
 
 
 # 📷 Screenshots
