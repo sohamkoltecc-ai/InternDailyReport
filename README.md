@@ -291,7 +291,7 @@ All data remains on the user's device.
 
 For product updates, release notes, documentation, and direct application downloads, visit the official website:
 
-🌐 :contentReference[oaicite:1]{index=1}
+🌐 https://dailyreportgen.netlify.app/
 
 The website provides:
 - Latest application releases
