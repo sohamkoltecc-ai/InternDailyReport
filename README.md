@@ -287,6 +287,11 @@ All data remains on the user's device.
 
 ---
 
+# Visit our website for more update
+https://dailyreportgen.netlify.app/
+
+---
+
 # 🛣️ Future Roadmap
 
 ## Version 2.0
