@@ -287,8 +287,20 @@ All data remains on the user's device.
 
 ---
 
-# Visit our website for more update
-https://dailyreportgen.netlify.app/
+## Get Started
+
+For product updates, release notes, documentation, and direct application downloads, visit the official website:
+
+🌐 :contentReference[oaicite:1]{index=1}
+
+The website provides:
+- Latest application releases
+- Installation guides
+- Feature documentation
+- Screenshots and demos
+- Direct download links for pre-built binaries
+
+No source-code setup required.
 
 ---
 
