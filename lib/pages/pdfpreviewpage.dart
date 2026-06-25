@@ -37,35 +37,237 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
         build: (context) => [
           pw.Center(
-            child: pw.Text(
-              settings["companyName"] ?? "",
-              style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.bold),
+            child: pw.RichText(
+              text: pw.TextSpan(
+                children: [
+                  pw.TextSpan(
+                    text: "Daily Work Report - ",
+                    style: pw.TextStyle(
+                      color: PdfColors.blue,
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  pw.TextSpan(
+                    text: settings["title"] ?? "",
+                    style: pw.TextStyle(
+                      color: PdfColors.blue,
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
-          pw.SizedBox(height: 20),
+          pw.SizedBox(height: 10),
 
-          pw.Text("Student Name : ${settings["studentName"] ?? ""}"),
+          pw.Divider(color: PdfColors.blue),
 
-          pw.Text("College Name : ${settings["collegeName"] ?? ""}"),
+          pw.SizedBox(height: 10),
 
-          pw.Text("Role : ${settings["internshipRole"] ?? ""}"),
+          pw.Row(
+            children: [
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "Student Name\n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["studentName"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
-          pw.Text("Duration : ${settings["reportDuration"] ?? ""}"),
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "Company Name\n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["companyName"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
 
-          pw.Text(
-            "Duration : ${settings["startDate"]} to ${settings["endDate"]}",
+          pw.SizedBox(height: 5),
+
+          pw.Row(
+            children: [
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "Role \n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["internshipRole"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "Duration \n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["startDate"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: " - ",
+                        style: const pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["endDate"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          pw.SizedBox(height: 5),
+
+          pw.Row(
+            children: [
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "College Name\n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["collegeName"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              pw.Expanded(
+                flex: 2,
+                child: pw.RichText(
+                  text: pw.TextSpan(
+                    children: [
+                      const pw.TextSpan(
+                        text: "Guide Name\n",
+                        style: pw.TextStyle(
+                          color: PdfColors.grey,
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                      pw.TextSpan(
+                        text: settings["guideName"] ?? "",
+                        style: const pw.TextStyle(
+                          color: PdfColors.black,
+                          fontSize: 13,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
 
           pw.SizedBox(height: 10),
 
           pw.Divider(),
 
-          pw.SizedBox(height: 10),
+          pw.SizedBox(height: 5),
 
           pw.Text(
-            widget.projectName,
-            style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+            "Daily Report",
+            style: pw.TextStyle(
+              color: PdfColors.black,
+              fontSize: 14,
+              fontWeight: pw.FontWeight.bold,
+            ),
           ),
 
           pw.SizedBox(height: 20),
@@ -75,9 +277,12 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
             return [
               pw.Text(
-                "Week ${week["week"]}",
+                (week["title"] ?? "").toString().isNotEmpty
+                    ? "Week ${week["week"]}  -  Task: ${week["title"]}"
+                    : "Week ${week["week"]}",
                 style: pw.TextStyle(
-                  fontSize: 16,
+                  fontSize: 12,
+                  color: PdfColors.blue,
                   fontWeight: pw.FontWeight.bold,
                 ),
               ),
@@ -86,49 +291,134 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
               ...entries.map<pw.Widget>((entry) {
                 return pw.Container(
-                  margin: const pw.EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  constraints: const pw.BoxConstraints(minHeight: 120),
+                  margin: const pw.EdgeInsets.only(bottom: 12),
+                  padding: const pw.EdgeInsets.all(12),
 
-                  padding: const pw.EdgeInsets.all(10),
-
-                  decoration: pw.BoxDecoration(border: pw.Border.all()),
+                  decoration: pw.BoxDecoration(
+                    color: PdfColors.grey100,
+                    border: pw.Border.all(color: PdfColors.grey400, width: 0.5),
+                    borderRadius: pw.BorderRadius.circular(8),
+                  ),
 
                   child: pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
-
                     children: [
-                      pw.Text(
-                        "Day ${entry["day"]}",
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Text(
+                            "Day ${entry["day"]} | ${getWeekDay(entry["date"] ?? "")} , ${entry["date"] ?? "-"}",
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
+                          ),
+
+                          pw.Container(
+                            padding: const pw.EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
+                            decoration: pw.BoxDecoration(
+                              color: PdfColors.blue50,
+                              borderRadius: pw.BorderRadius.circular(12),
+                            ),
+                            child: pw.Text(
+                              "${entry["hours"] ?? "-"} hrs",
+                              style: pw.TextStyle(
+                                fontSize: 8,
+                                fontWeight: pw.FontWeight.bold,
+                                color: PdfColors.blue800,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
 
-                      pw.SizedBox(height: 5),
+                      pw.SizedBox(height: 4),
 
-                      pw.Text("Date : ${entry["date"]}"),
-
-                      pw.Text("Hours : ${entry["hours"]}"),
-
-                      pw.SizedBox(height: 5),
-
-                      pw.Text(
-                        entry["title"],
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                      pw.RichText(
+                        text: pw.TextSpan(
+                          children: [
+                            pw.TextSpan(
+                              text: "Task: ",
+                              style: pw.TextStyle(
+                                fontWeight: pw.FontWeight.bold,
+                                fontSize: 8,
+                              ),
+                            ),
+                            pw.TextSpan(
+                              text: entry["title"] ?? "-",
+                              style: const pw.TextStyle(fontSize: 8),
+                            ),
+                          ],
+                        ),
                       ),
 
-                      pw.SizedBox(height: 5),
+                      pw.SizedBox(height: 8),
 
-                      pw.Text("Challenges"),
+                      pw.Text(
+                        "Challenges",
+                        style: pw.TextStyle(
+                          fontWeight: pw.FontWeight.bold,
+                          fontSize: 8,
+                        ),
+                      ),
 
-                      pw.Text(entry["challenges"]),
+                      pw.SizedBox(height: 2),
 
-                      pw.SizedBox(height: 5),
+                      pw.Text(
+                        (entry["challenges"] ?? "").toString().isEmpty
+                            ? "-"
+                            : entry["challenges"],
+                        style: const pw.TextStyle(fontSize: 8),
+                      ),
 
-                      pw.Text("Description"),
+                      pw.SizedBox(height: 12),
 
-                      pw.Text(entry["description"]),
+                      pw.Text(
+                        "Description",
+                        style: pw.TextStyle(
+                          fontWeight: pw.FontWeight.bold,
+                          fontSize: 8,
+                        ),
+                      ),
+
+                      pw.SizedBox(height: 2),
+
+                      pw.Text(
+                        (entry["description"] ?? "").toString().isEmpty
+                            ? "-"
+                            : entry["description"],
+                        style: const pw.TextStyle(fontSize: 8),
+                      ),
                     ],
                   ),
                 );
               }),
+
+              pw.Text(
+                "Week Summary : ",
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  color: PdfColors.blue,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+
+              pw.Text(
+                week["weekSummary"] ?? "",
+                style: pw.TextStyle(color: PdfColors.black, fontSize: 12),
+              ),
+
+              pw.SizedBox(height: 20),
+
+              pw.Divider(),
+
+              pw.SizedBox(height: 20),
             ];
           }),
         ],
@@ -136,6 +426,32 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
     );
 
     await savePdf(pdf);
+  }
+
+  String getWeekDay(String dateString) {
+    try {
+      final parts = dateString.split('-');
+
+      final date = DateTime(
+        int.parse(parts[2]),
+        int.parse(parts[1]),
+        int.parse(parts[0]),
+      );
+
+      const days = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ];
+
+      return days[date.weekday - 1];
+    } catch (e) {
+      return '';
+    }
   }
 
   Future<void> savePdf(pw.Document pdf) async {
@@ -196,27 +512,214 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header
+                    // header
                     Center(
-                      child: Text(
-                        settings["companyName"] ?? "",
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Daily Work Report - ",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 42,
+                              ),
+                            ),
+                            TextSpan(
+                              text: settings["title"] ?? "",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 42,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
 
                     const SizedBox(height: 20),
 
-                    Text("Student Name : ${settings["studentName"] ?? ""}"),
+                    const Divider(thickness: 2, color: Colors.blue),
 
-                    Text("College Name : ${settings["collegeName"] ?? ""}"),
+                    const SizedBox(height: 20),
 
-                    Text("Role : ${settings["internshipRole"] ?? ""}"),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "Student Name\n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["studentName"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
 
-                    Text(
-                      "Duration : ${settings["startDate"]} to ${settings["endDate"]}",
+                        Expanded(
+                          flex: 1,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "Company Name\n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["companyName"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "Role : \n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["internshipRole"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        Expanded(
+                          flex: 2,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "Duration : \n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["startDate"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: " - ",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["endDate"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "College Name\n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["collegeName"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        Expanded(
+                          flex: 2,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: "Guide Name\n",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: settings["guideName"] ?? "",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(height: 20),
@@ -226,7 +729,7 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                     const SizedBox(height: 20),
 
                     Text(
-                      widget.projectName,
+                      "Daily Report",
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -242,60 +745,162 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Week ${week["week"]}",
-                            style: const TextStyle(
-                              fontSize: 20,
+                            (week["title"] ?? "").toString().isNotEmpty
+                                ? "Week ${week["week"]}  -  Task: ${week["title"]}"
+                                : "Week ${week["week"]}",
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
 
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 15),
 
                           ...entries.map<Widget>((entry) {
-                            return Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Day ${entry["day"]}",
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                            return Container(
+                              width: double.infinity,
+                              constraints: const BoxConstraints(minHeight: 120),
+                              margin: const EdgeInsets.only(bottom: 12),
+                              padding: const EdgeInsets.all(12),
 
-                                    Text("Date: ${entry["date"]}"),
-
-                                    Text("Hours: ${entry["hours"]}"),
-
-                                    const SizedBox(height: 8),
-
-                                    Text(
-                                      entry["title"],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 5),
-
-                                    Text("Challenges"),
-
-                                    Text(entry["challenges"]),
-
-                                    const SizedBox(height: 5),
-
-                                    Text("Description"),
-
-                                    Text(entry["description"]),
-                                  ],
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(160, 160, 160, 160),
+                                border: Border.all(
+                                  color: Color.fromARGB(160, 160, 160, 160),
+                                  width: 0.5,
                                 ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Day ${entry["day"]} | ${getWeekDay(entry["date"] ?? "")} , ${entry["date"] ?? "-"}",
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          //color: Colors.blue,
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "${entry["hours"] ?? "-"} hrs",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(height: 4),
+
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: "Task: ",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontSize: 22,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: entry["title"] ?? "-",
+                                          style: const TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 8),
+
+                                  Text(
+                                    "Challenges",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 2),
+
+                                  Text(
+                                    (entry["challenges"] ?? "")
+                                            .toString()
+                                            .isEmpty
+                                        ? "-"
+                                        : entry["challenges"],
+                                    style: const TextStyle(fontSize: 22),
+                                  ),
+
+                                  SizedBox(height: 12),
+
+                                  Text(
+                                    "Description",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 2),
+                                  Text(
+                                    (entry["description"] ?? "")
+                                            .toString()
+                                            .isEmpty
+                                        ? "-"
+                                        : entry["description"],
+                                    style: const TextStyle(fontSize: 22),
+                                  ),
+                                ],
                               ),
                             );
                           }),
 
-                          const SizedBox(height: 20),
+                          Text(
+                            "Week Summary : ",
+                            style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+
+                          Text(
+                            week["weekSummary"] ?? "",
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                          ),
+
+                          SizedBox(height: 20),
+
+                          Divider(),
+
+                          SizedBox(height: 20),
                         ],
                       );
                     }),

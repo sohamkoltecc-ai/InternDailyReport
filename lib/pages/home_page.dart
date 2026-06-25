@@ -8,8 +8,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() =>
-      _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -26,15 +25,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Row(
         children: [
-
           // Sidebar
           Container(
             width: 250,
-            color: Colors.blue,
+            color: Color(0xFF0D47A1),
 
             child: Column(
               children: [
-
                 const SizedBox(height: 30),
 
                 const Text(
@@ -42,38 +39,74 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 32,
-                    fontWeight:
-                        FontWeight.bold,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
 
                 const SizedBox(height: 40),
 
-                menuButton(
-                  icon: Icons.dashboard,
-                  title: "Dashboard",
-                  index: 0,
+                Expanded(
+                  flex: 9,
+                  child: Column(
+                    children: [
+                      menuButton(
+                        icon: Icons.dashboard,
+                        title: "Dashboard",
+                        index: 0,
+                      ),
+
+                      menuButton(
+                        icon: Icons.folder,
+                        title: "Projects",
+                        index: 1,
+                      ),
+
+                      menuButton(
+                        icon: Icons.settings,
+                        title: "Settings",
+                        index: 2,
+                      ),
+                    ],
+                  ),
                 ),
 
-                menuButton(
-                  icon: Icons.folder,
-                  title: "Projects",
-                  index: 1,
-                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Divider(color: Colors.white, height: 3,),
+                      const SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.info_outline,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            " Version 1.0",
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
 
-                menuButton(
-                  icon: Icons.settings,
-                  title: "Settings",
-                  index: 2,
+                        ],
+                      ),
+                          const SizedBox(height: 10),
+
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
 
           // Main Content
-          Expanded(
-            child: pages[selectedIndex],
-          ),
+          Expanded(child: pages[selectedIndex]),
         ],
       ),
     );
@@ -84,25 +117,14 @@ class _HomePageState extends State<HomePage> {
     required String title,
     required int index,
   }) {
-    bool selected =
-        selectedIndex == index;
+    bool selected = selectedIndex == index;
 
     return ListTile(
-      leading: Icon(
-        icon,
-        color: Colors.white,
-      ),
+      leading: Icon(icon, color: Colors.white),
 
-      title: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
+      title: Text(title, style: const TextStyle(color: Colors.white)),
 
-      tileColor: selected
-          ? Colors.white24
-          : Colors.transparent,
+      tileColor: selected ? Colors.white24 : Colors.transparent,
 
       onTap: () {
         setState(() {

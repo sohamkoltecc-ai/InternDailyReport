@@ -26,46 +26,143 @@ class _ProjectsPageState extends State<ProjectsPage> {
     showDialog(
       context: context,
       builder: (_) {
-        return AlertDialog(
-          title: const Text("New Project"),
-          content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(hintText: "Project Name"),
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Cancel"),
+          child: SizedBox(
+            width: 500,
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.folder_open_rounded,
+                        color: Color(0xFF4F46E5),
+                        size: 28,
+                      ),
+                      SizedBox(width: 12),
+                      Text(
+                        "New Project",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Color(0xFF4F46E5),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  TextField(
+                    controller: controller,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      hintText: "Project Name",
+                      prefixIcon: const Icon(
+                        Icons.drive_file_rename_outline_rounded,
+                        color: Color(0xFF4F46E5),
+                      ),
+                      filled: true,
+                      fillColor: const Color(0xFFF5F7FA),
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide.none,
+                      ),
+
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide.none,
+                      ),
+
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF4F46E5),
+                          width: 1.5,
+                        ),
+                      ),
+
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 18,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4F46E5),
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size.fromHeight(50),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          onPressed: () async {
+                            String projectName = controller.text.trim();
+
+                            if (projectName.isEmpty) {
+                              return;
+                            }
+
+                            if (projects.contains(projectName)) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Project already exists"),
+                                ),
+                              );
+                              return;
+                            }
+
+                            await createProjectFile(projectName);
+                            await loadProjects();
+
+                            if (mounted) {
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: const Text(
+                            "Create Project",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-
-            ElevatedButton(
-              onPressed: () async {
-                String projectName = controller.text.trim();
-
-                if (projectName.isEmpty) {
-                  return;
-                }
-
-                if (projects.contains(projectName)) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Project already exists")),
-                  );
-                  return;
-                }
-
-                await createProjectFile(projectName);
-
-                await loadProjects();
-
-                if (mounted) {
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text("Save"),
-            ),
-          ],
+          ),
         );
       },
     );
@@ -112,68 +209,187 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: projects.isEmpty
-          ? const Center(child: Text("No Projects Found"))
-          : ListView.builder(
-              itemCount: projects.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.all(10),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(25),
+                child: Text(
+                  'Projects',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0D47A1),
+                  ),
+                ),
+              ),
 
-                  child: ListTile(
-                    title: Text(projects[index]),
+              const SizedBox(height: 5),
 
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.red),
-                          onPressed: () async {
-                            bool? shouldDelete = await showDialog<bool>(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                title: const Text("Delete Project"),
-                                content: Text("Delete ${projects[index]} ?"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context, false);
+              Container(
+                constraints: const BoxConstraints(minHeight: 600),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: const Color(0xFFE3F2FD),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.5),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+                child: projects.isEmpty
+                    ? const Center(child: Text("No Projects Found"))
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: projects.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            margin: const EdgeInsets.all(15),
+                            clipBehavior: Clip.antiAlias,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 5,
+                            shadowColor: Colors.black,
+                            child: ListTile(
+                              title: Text(projects[index]),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () async {
+                                      bool?
+                                      shouldDelete = await showDialog<bool>(
+                                        context: context,
+                                        builder: (_) => AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                          ),
+
+                                          icon: const Icon(
+                                            Icons.delete_outline_rounded,
+                                            color: Colors.red,
+                                            size: 36,
+                                          ),
+
+                                          title: const Text(
+                                            "Delete Project",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+
+                                          content: SizedBox(
+                                            width: 350,
+                                            child: RichText(
+                                              textAlign: TextAlign.center,
+                                              text: TextSpan(
+                                                style: const TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 14,
+                                                ),
+                                                children: [
+                                                  const TextSpan(
+                                                    text:
+                                                        'Are you sure you want to delete ',
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '"${projects[index]}"',
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                  const TextSpan(text: '?'),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          actionsAlignment:
+                                              MainAxisAlignment.center,
+
+                                          actions: [
+                                            OutlinedButton(
+                                              style: OutlinedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context, false);
+                                              },
+                                              child: const Text("Cancel"),
+                                            ),
+
+                                            ElevatedButton.icon(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                foregroundColor: Colors.white,
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context, true);
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete_outline,
+                                              ),
+                                              label: const Text("Delete"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+
+                                      if (shouldDelete == true) {
+                                        await deleteProject(projects[index]);
+                                      }
                                     },
-                                    child: const Text("Cancel"),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                    child: const Text("Delete"),
                                   ),
                                 ],
                               ),
-                            );
-
-                            if (shouldDelete == true) {
-                              await deleteProject(projects[index]);
-                            }
-                          },
-                        ),
-
-                        const Icon(Icons.arrow_forward_ios, size: 18),
-                      ],
-                    ),
-
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              ProjectDetailPage(projectName: projects[index]),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ProjectDetailPage(
+                                      projectName: projects[index],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
+        ),
+      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: addProject,
@@ -181,30 +397,32 @@ class _ProjectsPageState extends State<ProjectsPage> {
       ),
     );
   }
-}
 
-Future<Directory> getProjectsDirectory() async {
-  final docsDir = await getApplicationDocumentsDirectory();
+  Future<Directory> getProjectsDirectory() async {
+    final docsDir = await getApplicationDocumentsDirectory();
 
-  final projectDir = Directory('${docsDir.path}/DailyReportGenerator/projects');
+    final projectDir = Directory(
+      '${docsDir.path}/DailyReportGenerator/projects',
+    );
 
-  if (!await projectDir.exists()) {
-    await projectDir.create(recursive: true);
+    if (!await projectDir.exists()) {
+      await projectDir.create(recursive: true);
+    }
+
+    return projectDir;
   }
 
-  return projectDir;
-}
+  Future<void> createProjectFile(String projectName) async {
+    final dir = await getProjectsDirectory();
 
-Future<void> createProjectFile(String projectName) async {
-  final dir = await getProjectsDirectory();
+    final fileName = projectName.replaceAll(" ", "_");
 
-  final fileName = projectName.replaceAll(" ", "_");
+    final file = File('${dir.path}/$fileName.json');
 
-  final file = File('${dir.path}/$fileName.json');
+    final data = {"projectName": projectName, "entries": []};
 
-  final data = {"projectName": projectName, "entries": []};
+    await file.writeAsString(const JsonEncoder.withIndent('  ').convert(data));
 
-  await file.writeAsString(const JsonEncoder.withIndent('  ').convert(data));
-
-  print("Project Created: ${file.path}");
+    print("Project Created: ${file.path}");
+  }
 }

@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+
+  Widget modernField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    bool readOnly = false,
+    VoidCallback? onTap,
+  }) {
+    return TextField(
+      controller: controller,
+      readOnly: readOnly,
+      onTap: onTap,
+      decoration: InputDecoration(
+        hintText: hint,
+        prefixIcon: Icon(icon, color: Color(0xFF4F46E5),),
+
+        filled: true,
+        fillColor: const Color(0xFFF5F7FA),
+
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(color: Color(0xFF4F46E5), width: 1.5),
+        ),
+
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 18,
+        ),
+      ),
+    );
+  }

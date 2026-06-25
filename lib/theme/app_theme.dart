@@ -5,14 +5,14 @@ class AppTheme {
     useMaterial3: true,
 
     colorScheme: ColorScheme.light(
-      primary: Colors.blue,
+      primary: Color(0xFF0D47A1),
       secondary: Colors.blueAccent,
     ),
 
     scaffoldBackgroundColor: Colors.white,
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color(0xFF0D47A1),
       foregroundColor: Colors.white,
     ),
 
